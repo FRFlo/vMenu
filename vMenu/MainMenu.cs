@@ -44,7 +44,6 @@ namespace vMenuClient
         public static Recording RecordingMenu { get; private set; }
         public static MiscSettings MiscSettingsMenu { get; private set; }
         public static VoiceChat VoiceChatSettingsMenu { get; private set; }
-        public static About AboutMenu { get; private set; }
         public static bool NoClipEnabled { get { return NoClip.IsNoclipActive(); } set { NoClip.SetNoclipActive(value); } }
         public static IPlayerList PlayersList;
 
@@ -415,10 +414,10 @@ namespace vMenuClient
                 }
 
                 // Create the main menu.
-                Menu = new Menu(Game.Player.Name, "Main Menu");
-                PlayerSubmenu = new Menu(Game.Player.Name, "Player Related Options");
-                VehicleSubmenu = new Menu(Game.Player.Name, "Vehicle Related Options");
-                WorldSubmenu = new Menu(Game.Player.Name, "World Options");
+                Menu = new Menu(Game.Player.Name, "Menu principal");
+                PlayerSubmenu = new Menu(Game.Player.Name, "Options relatives au joueur");
+                VehicleSubmenu = new Menu(Game.Player.Name, "Options relatives au véhicule");
+                WorldSubmenu = new Menu(Game.Player.Name, "Options du monde");
 
                 // Add the main menu to the menu pool.
                 MenuController.AddMenu(Menu);
@@ -505,7 +504,7 @@ namespace vMenuClient
                 if (Game.IsDisabledControlJustReleased(0, Control.PhoneCancel) && MpPedCustomization.DisableBackButton)
                 {
                     await Delay(0);
-                    Notify.Alert("You must save your ped first before exiting, or click the ~r~Exit Without Saving~s~ button.");
+                    Notify.Alert("Vous devez d'abord enregistrer votre ped avant de quitter, ou cliquer sur le bouton ~r~Quitter sans sauvegarder~s~.");
                 }
 
                 if (Game.CurrentInputMode == InputMode.MouseAndKeyboard)
@@ -522,7 +521,7 @@ namespace vMenuClient
                             else
                             {
                                 NoClipEnabled = false;
-                                Notify.Error("This vehicle does not exist (somehow) or you need to be the driver of this vehicle to enable noclip!");
+                                Notify.Error("Ce véhicule n'existe pas (en quelque sorte) ou vous devez être le conducteur de ce véhicule pour activer noclip !");
                             }
                         }
                         else
@@ -566,7 +565,7 @@ namespace vMenuClient
             {
                 OnlinePlayersMenu = new OnlinePlayers();
                 Menu menu = OnlinePlayersMenu.GetMenu();
-                MenuItem button = new MenuItem("Online Players", "All currently connected players.")
+                MenuItem button = new MenuItem("Joueurs en ligne", "Tous les joueurs actuellement connectés.")
                 {
                     Label = "→→→"
                 };
@@ -586,7 +585,7 @@ namespace vMenuClient
             {
                 BannedPlayersMenu = new BannedPlayers();
                 Menu menu = BannedPlayersMenu.GetMenu();
-                MenuItem button = new MenuItem("Banned Players", "View and manage all banned players in this menu.")
+                MenuItem button = new MenuItem("Joueurs bannis", "Visualisez et gérez tous les joueurs bannis dans ce menu.")
                 {
                     Label = "→→→"
                 };
@@ -601,7 +600,7 @@ namespace vMenuClient
                 };
             }
 
-            MenuItem playerSubmenuBtn = new MenuItem("Player Related Options", "Open this submenu for player related subcategories.") { Label = "→→→" };
+            MenuItem playerSubmenuBtn = new MenuItem("Options relatives au joueur", "Ouvrez ce sous-menu pour les sous-catégories liées au joueur.") { Label = "→→→" };
             Menu.AddMenuItem(playerSubmenuBtn);
 
             // Add the player options menu.
@@ -609,21 +608,21 @@ namespace vMenuClient
             {
                 PlayerOptionsMenu = new PlayerOptions();
                 Menu menu = PlayerOptionsMenu.GetMenu();
-                MenuItem button = new MenuItem("Player Options", "Common player options can be accessed here.")
+                MenuItem button = new MenuItem("Options du joueur", "Les options courantes du joueur sont accessibles ici.")
                 {
                     Label = "→→→"
                 };
                 AddMenu(PlayerSubmenu, menu, button);
             }
 
-            MenuItem vehicleSubmenuBtn = new MenuItem("Vehicle Related Options", "Open this submenu for vehicle related subcategories.") { Label = "→→→" };
+            MenuItem vehicleSubmenuBtn = new MenuItem("Options liées au véhicule", "Ouvrez ce sous-menu pour les sous-catégories relatives au véhicule.") { Label = "→→→" };
             Menu.AddMenuItem(vehicleSubmenuBtn);
             // Add the vehicle options Menu.
             if (IsAllowed(Permission.VOMenu))
             {
                 VehicleOptionsMenu = new VehicleOptions();
                 Menu menu = VehicleOptionsMenu.GetMenu();
-                MenuItem button = new MenuItem("Vehicle Options", "Here you can change common vehicle options, as well as tune & style your vehicle.")
+                MenuItem button = new MenuItem("Options du véhicule", "Vous pouvez y modifier les options courantes du véhicule, ainsi que le régler et le styliser.")
                 {
                     Label = "→→→"
                 };
@@ -635,7 +634,7 @@ namespace vMenuClient
             {
                 VehicleSpawnerMenu = new VehicleSpawner();
                 Menu menu = VehicleSpawnerMenu.GetMenu();
-                MenuItem button = new MenuItem("Vehicle Spawner", "Spawn a vehicle by name or choose one from a specific category.")
+                MenuItem button = new MenuItem("Générateur de véhicules", "Créez un véhicule par son nom ou choisissez-en un dans une catégorie spécifique.")
                 {
                     Label = "→→→"
                 };
@@ -647,7 +646,7 @@ namespace vMenuClient
             {
                 SavedVehiclesMenu = new SavedVehicles();
                 Menu menu = SavedVehiclesMenu.GetMenu();
-                MenuItem button = new MenuItem("Saved Vehicles", "Save new vehicles, or spawn or delete already saved vehicles.")
+                MenuItem button = new MenuItem("Véhicules sauvegardés", "Enregistrez de nouveaux véhicules, ou créez ou supprimez des véhicules déjà enregistrés.")
                 {
                     Label = "→→→"
                 };
@@ -666,7 +665,7 @@ namespace vMenuClient
             {
                 PersonalVehicleMenu = new PersonalVehicle();
                 Menu menu = PersonalVehicleMenu.GetMenu();
-                MenuItem button = new MenuItem("Personal Vehicle", "Set a vehicle as your personal vehicle, and control some things about that vehicle when you're not inside.")
+                MenuItem button = new MenuItem("Véhicule personnel", "Définissez un véhicule comme votre véhicule personnel, et contrôlez certaines choses concernant ce véhicule lorsque vous n'êtes pas à l'intérieur.")
                 {
                     Label = "→→→"
                 };
@@ -678,7 +677,7 @@ namespace vMenuClient
             {
                 PlayerAppearanceMenu = new PlayerAppearance();
                 Menu menu = PlayerAppearanceMenu.GetMenu();
-                MenuItem button = new MenuItem("Player Appearance", "Choose a ped model, customize it and save & load your customized characters.")
+                MenuItem button = new MenuItem("Apparence du joueur", "Choisissez un modèle de ped, personnalisez-le et sauvegardez et chargez vos personnages personnalisés.")
                 {
                     Label = "→→→"
                 };
@@ -686,14 +685,14 @@ namespace vMenuClient
 
                 MpPedCustomizationMenu = new MpPedCustomization();
                 Menu menu2 = MpPedCustomizationMenu.GetMenu();
-                MenuItem button2 = new MenuItem("MP Ped Customization", "Create, edit, save and load multiplayer peds. ~r~Note, you can only save peds created in this submenu. vMenu can NOT detect peds created outside of this submenu. Simply due to GTA limitations.")
+                MenuItem button2 = new MenuItem("Personnalisation du Ped", "Créer, éditer, sauvegarder et charger des peds multi-joueurs. ~r~Attention, vous ne pouvez sauvegarder que les peds créés dans ce sous-menu. Le vMenu ne peut PAS détecter les peds créés en dehors de ce sous-menu.")
                 {
                     Label = "→→→"
                 };
                 AddMenu(PlayerSubmenu, menu2, button2);
             }
 
-            MenuItem worldSubmenuBtn = new MenuItem("World Related Options", "Open this submenu for world related subcategories.") { Label = "→→→" };
+            MenuItem worldSubmenuBtn = new MenuItem("Options relatives au monde", "Ouvrez ce sous-menu pour les sous-catégories liées au monde.") { Label = "→→→" };
             Menu.AddMenuItem(worldSubmenuBtn);
 
             // Add the time options menu.
@@ -702,7 +701,7 @@ namespace vMenuClient
             {
                 TimeOptionsMenu = new TimeOptions();
                 Menu menu = TimeOptionsMenu.GetMenu();
-                MenuItem button = new MenuItem("Time Options", "Change the time, and edit other time related options.")
+                MenuItem button = new MenuItem("Options de temps", "Changez l'heure et modifiez d'autres options liées à l'heure.")
                 {
                     Label = "→→→"
                 };
@@ -715,7 +714,7 @@ namespace vMenuClient
             {
                 WeatherOptionsMenu = new WeatherOptions();
                 Menu menu = WeatherOptionsMenu.GetMenu();
-                MenuItem button = new MenuItem("Weather Options", "Change all weather related options here.")
+                MenuItem button = new MenuItem("Options météo", "Modifiez toutes les options liées à la météo ici.")
                 {
                     Label = "→→→"
                 };
@@ -727,7 +726,7 @@ namespace vMenuClient
             {
                 WeaponOptionsMenu = new WeaponOptions();
                 Menu menu = WeaponOptionsMenu.GetMenu();
-                MenuItem button = new MenuItem("Weapon Options", "Add/remove weapons, modify weapons and set ammo options.")
+                MenuItem button = new MenuItem("Options d'armement", "Ajoutez/supprimez des armes, modifiez-les et définissez les options de munitions.")
                 {
                     Label = "→→→"
                 };
@@ -739,7 +738,7 @@ namespace vMenuClient
             {
                 WeaponLoadoutsMenu = new WeaponLoadouts();
                 Menu menu = WeaponLoadoutsMenu.GetMenu();
-                MenuItem button = new MenuItem("Weapon Loadouts", "Mange, and spawn saved weapon loadouts.")
+                MenuItem button = new MenuItem("Configurations d'armes", "Gérez, et sauvegardez vos configurations d'armes.")
                 {
                     Label = "→→→"
                 };
@@ -748,7 +747,7 @@ namespace vMenuClient
 
             if (IsAllowed(Permission.NoClip))
             {
-                MenuItem toggleNoclip = new MenuItem("Toggle NoClip", "Toggle NoClip on or off.");
+                MenuItem toggleNoclip = new MenuItem("Basculer le NoClip", "Active ou désactive le NoClip.");
                 PlayerSubmenu.AddMenuItem(toggleNoclip);
                 PlayerSubmenu.OnItemSelect += (sender, item, index) =>
                 {
@@ -764,7 +763,7 @@ namespace vMenuClient
             {
                 VoiceChatSettingsMenu = new VoiceChat();
                 Menu menu = VoiceChatSettingsMenu.GetMenu();
-                MenuItem button = new MenuItem("Voice Chat Settings", "Change Voice Chat options here.")
+                MenuItem button = new MenuItem("Paramètres du chat vocal", "Modifiez les options de chat vocal ici.")
                 {
                     Label = "→→→"
                 };
@@ -774,7 +773,7 @@ namespace vMenuClient
             {
                 RecordingMenu = new Recording();
                 Menu menu = RecordingMenu.GetMenu();
-                MenuItem button = new MenuItem("Recording Options", "In-game recording options.")
+                MenuItem button = new MenuItem("Options d'enregistrement", "Options d'enregistrement dans le jeu.")
                 {
                     Label = "→→→"
                 };
@@ -785,28 +784,19 @@ namespace vMenuClient
             {
                 MiscSettingsMenu = new MiscSettings();
                 Menu menu = MiscSettingsMenu.GetMenu();
-                MenuItem button = new MenuItem("Misc Settings", "Miscellaneous vMenu options/settings can be configured here. You can also save your settings in this menu.")
+                MenuItem button = new MenuItem("Paramètres divers", "Diverses options/réglages du vMenu peuvent être configurés ici. Vous pouvez également enregistrer vos paramètres dans ce menu.")
                 {
                     Label = "→→→"
                 };
                 AddMenu(Menu, menu, button);
             }
 
-            // Add About Menu.
-            AboutMenu = new About();
-            Menu sub = AboutMenu.GetMenu();
-            MenuItem btn = new MenuItem("About vMenu", "Information about vMenu.")
-            {
-                Label = "→→→"
-            };
-            AddMenu(Menu, sub, btn);
-
             // Refresh everything.
             MenuController.Menus.ForEach((m) => m.RefreshIndex());
 
             if (!GetSettingsBool(Setting.vmenu_use_permissions))
             {
-                Notify.Alert("vMenu is set up to ignore permissions, default permissions will be used.");
+                Notify.Alert("Le vMenu est configuré pour ignorer les permissions, les permissions par défaut seront utilisées.");
             }
 
             if (PlayerSubmenu.Size > 0)

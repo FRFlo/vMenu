@@ -79,29 +79,29 @@ namespace vMenuClient
             }
 
             // Create the menu.
-            menu = new Menu(Game.Player.Name, "Misc Settings");
-            teleportOptionsMenu = new Menu(Game.Player.Name, "Teleport Options");
-            developerToolsMenu = new Menu(Game.Player.Name, "Development Tools");
-            entitySpawnerMenu = new Menu(Game.Player.Name, "Entity Spawner");
+            menu = new Menu(Game.Player.Name, "Paramètres divers");
+            teleportOptionsMenu = new Menu(Game.Player.Name, "Options de téléportation");
+            developerToolsMenu = new Menu(Game.Player.Name, "Outils de développement");
+            entitySpawnerMenu = new Menu(Game.Player.Name, "Spawner d'entité");
 
             // teleport menu
-            Menu teleportMenu = new Menu(Game.Player.Name, "Teleport Locations");
-            MenuItem teleportMenuBtn = new MenuItem("Teleport Locations", "Teleport to pre-configured locations, added by the server owner.");
+            Menu teleportMenu = new Menu(Game.Player.Name, "Emplacements de téléportation");
+            MenuItem teleportMenuBtn = new MenuItem("Emplacements de téléportation", "Téléportation vers des emplacements préconfigurés, ajoutés par le propriétaire du serveur.");
             MenuController.AddSubmenu(menu, teleportMenu);
             MenuController.BindMenuItem(menu, teleportMenu, teleportMenuBtn);
 
             // keybind settings menu
-            Menu keybindMenu = new Menu(Game.Player.Name, "Keybind Settings");
-            MenuItem keybindMenuBtn = new MenuItem("Keybind Settings", "Enable or disable keybinds for some options.");
+            Menu keybindMenu = new Menu(Game.Player.Name, "Paramètres Keybinds");
+            MenuItem keybindMenuBtn = new MenuItem("Paramètres Keybinds", "Activer ou désactiver les raccourcis clavier pour certaines options.");
             MenuController.AddSubmenu(menu, keybindMenu);
             MenuController.BindMenuItem(menu, keybindMenu, keybindMenuBtn);
 
             // keybind settings menu items
-            MenuCheckboxItem kbTpToWaypoint = new MenuCheckboxItem("Teleport To Waypoint", "Teleport to your waypoint when pressing the keybind. By default, this keybind is set to ~r~F7~s~, server owners are able to change this however so ask them if you don't know what it is.", KbTpToWaypoint);
-            MenuCheckboxItem kbDriftMode = new MenuCheckboxItem("Drift Mode", "Makes your vehicle have almost no traction while holding left shift on keyboard, or X on controller.", KbDriftMode);
-            MenuCheckboxItem kbRecordKeys = new MenuCheckboxItem("Recording Controls", "Enables or disables the recording (gameplay recording for the Rockstar editor) hotkeys on both keyboard and controller.", KbRecordKeys);
-            MenuCheckboxItem kbRadarKeys = new MenuCheckboxItem("Minimap Controls", "Press the Multiplayer Info (z on keyboard, down arrow on controller) key to switch between expanded radar and normal radar.", KbRadarKeys);
-            MenuCheckboxItem kbPointKeysCheckbox = new MenuCheckboxItem("Finger Point Controls", "Enables the finger point toggle key. The default QWERTY keyboard mapping for this is 'B', or for controller quickly double tap the right analog stick.", KbPointKeys);
+            MenuCheckboxItem kbTpToWaypoint = new MenuCheckboxItem("Téléportation vers le waypoint.", "Téléportation vers votre waypoint en appuyant sur le keybind. Par défaut, ce keybind est réglé sur ~r~F7~s~, Les propriétaires des serveurs peuvent toutefois modifier ce paramètre, alors demandez-leur si vous ne le connaissez pas.", KbTpToWaypoint);
+            MenuCheckboxItem kbDriftMode = new MenuCheckboxItem("Mode Drift", "Votre véhicule n'a pratiquement aucune traction lorsque vous maintenez la touche gauche du clavier ou la touche X de la manette.", KbDriftMode);
+            MenuCheckboxItem kbRecordKeys = new MenuCheckboxItem("Commandes d'enregistrement", "Active ou désactive les touches de raccourci d'enregistrement (enregistrement du gameplay pour l'éditeur Rockstar) sur le clavier et la manette.", KbRecordKeys);
+            MenuCheckboxItem kbRadarKeys = new MenuCheckboxItem("Contrôles de la mini-map", "Appuyez sur la touche Info Multijoueur (z sur le clavier, flèche vers le bas sur la manette) pour passer du radar étendu au radar normal.", KbRadarKeys);
+            MenuCheckboxItem kbPointKeysCheckbox = new MenuCheckboxItem("Contrôles du doigt", "Active la touche de basculement du pointage du doigt. La correspondance par défaut du clavier QWERTY pour cette touche est 'B', ou pour la manette, tapez deux fois sur le stick analogique droit.", KbPointKeys);
             MenuItem backBtn = new MenuItem("Back");
 
             // Create the menu items.
@@ -141,7 +141,7 @@ namespace vMenuClient
             MenuItem confirmEntityPosition = new MenuItem("Confirm Entity Position", "Stops placing entity and sets it at it current location.");
             MenuItem cancelEntity = new MenuItem("Cancel", "Deletes current entity and cancels its placement");
             MenuItem confirmAndDuplicate = new MenuItem("Confirm Entity Position And Duplicate", "Stops placing entity and sets it at it current location and creates new one to place.");
-            
+
             Menu connectionSubmenu = new Menu(Game.Player.Name, "Connection Options");
             MenuItem connectionSubmenuBtn = new MenuItem("Connection Options", "Server connection/game quit options.");
 
@@ -515,7 +515,7 @@ namespace vMenuClient
                 MenuItem entSpawnerMenuBtn = new MenuItem("Entity Spawner", "Spawn and move entities") { Label = "→→→" };
                 developerToolsMenu.AddMenuItem(entSpawnerMenuBtn);
                 MenuController.BindMenuItem(developerToolsMenu, entitySpawnerMenu, entSpawnerMenuBtn);
-                
+
                 entitySpawnerMenu.AddMenuItem(spawnNewEntity);
                 entitySpawnerMenu.AddMenuItem(confirmEntityPosition);
                 entitySpawnerMenu.AddMenuItem(confirmAndDuplicate);
@@ -530,7 +530,7 @@ namespace vMenuClient
                             Notify.Error("You are already placing one entity, set its location or cancel and try again!");
                             return;
                         }
-                        
+
                         string result = await GetUserInput(windowTitle: "Enter model name");
 
                         if (String.IsNullOrEmpty(result))
@@ -539,7 +539,8 @@ namespace vMenuClient
                         }
 
                         EntitySpawner.SpawnEntity(result, Game.PlayerPed.Position);
-                    } else if (item == confirmEntityPosition || item == confirmAndDuplicate)
+                    }
+                    else if (item == confirmEntityPosition || item == confirmAndDuplicate)
                     {
                         if (EntitySpawner.CurrentEntity != null)
                         {
@@ -549,7 +550,8 @@ namespace vMenuClient
                         {
                             Notify.Error("No entity to confirm position for!");
                         }
-                    } else if (item == cancelEntity)
+                    }
+                    else if (item == cancelEntity)
                     {
                         if (EntitySpawner.CurrentEntity != null)
                         {
@@ -557,7 +559,7 @@ namespace vMenuClient
                         }
                         else
                         {
-                            Notify.Error("No entity to cancel!");
+                            Notify.Error("Aucune entité à supprimer !");
                         }
                     }
                 };

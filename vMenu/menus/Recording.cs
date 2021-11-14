@@ -22,11 +22,11 @@ namespace vMenuClient
         private void CreateMenu()
         {
             // Create the menu.
-            menu = new Menu("Recording", "Recording Options");
+            menu = new Menu("Enregistrement", "Options d'enregistrement");
 
-            MenuItem startRec = new MenuItem("Start Recording", "Start a new game recording using GTA V's built in recording.");
-            MenuItem stopRec = new MenuItem("Stop Recording", "Stop and save your current recording.");
-            MenuItem openEditor = new MenuItem("Rockstar Editor", "Open the rockstar editor, note you might want to quit the session first before doing this to prevent some issues.");
+            MenuItem startRec = new MenuItem("Démarrer l'enregistrement", "Commencez un nouvel enregistrement de jeu en utilisant l'enregistrement intégré de GTA V.");
+            MenuItem stopRec = new MenuItem("Arrêter l'enregistrement", "Arrêtez et sauvegardez votre enregistrement en cours.");
+            MenuItem openEditor = new MenuItem("Rockstar Editor", "Ouvrez l'éditeur rockstar, notez que vous pourriez vouloir quitter la session avant de faire cela pour éviter certains problèmes.");
             menu.AddMenuItem(startRec);
             menu.AddMenuItem(stopRec);
             menu.AddMenuItem(openEditor);
@@ -37,7 +37,7 @@ namespace vMenuClient
                 {
                     if (IsRecording())
                     {
-                        Notify.Alert("You are already recording a clip, you need to stop recording first before you can start recording again!");
+                        Notify.Alert("Vous êtes déjà en train d'enregistrer un clip, vous devez d'abord arrêter l'enregistrement avant de pouvoir le recommencer !");
                     }
                     else
                     {
@@ -48,7 +48,7 @@ namespace vMenuClient
                 {
                     if (!IsRecording())
                     {
-                        Notify.Alert("You are currently NOT recording a clip, you need to start recording first before you can stop and save a clip.");
+                        Notify.Alert("Vous n'êtes PAS en train d'enregistrer un clip, vous devez d'abord commencer à enregistrer avant de pouvoir arrêter et enregistrer un clip.");
                     }
                     else
                     {
@@ -69,7 +69,7 @@ namespace vMenuClient
                     }
                     // then fade in the screen.
                     DoScreenFadeIn(1);
-                    Notify.Alert("You left your previous session before entering the Rockstar Editor. Restart the game to be able to rejoin the server's main session.", true, true);
+                    Notify.Alert("Vous avez quitté votre session précédente avant d'entrer dans l'éditeur Rockstar. Redémarrez le jeu pour pouvoir rejoindre la session principale du serveur.", true, true);
                 }
             };
 

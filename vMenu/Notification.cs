@@ -53,51 +53,51 @@ namespace vMenuClient
             switch (errorType)
             {
                 case CommonErrors.NeedToBeTheDriver:
-                    outputMessage = "You need to be the driver of this vehicle.";
+                    outputMessage = "Vous devez être le conducteur de ce véhicule.";
                     break;
                 case CommonErrors.NoVehicle:
-                    outputMessage = $"You need to be inside a vehicle{placeholder}.";
+                    outputMessage = $"Vous devez être à l'intérieur d'un véhicule{placeholder}.";
                     break;
                 case CommonErrors.NotAllowed:
-                    outputMessage = $"You are not allowed to{placeholder}, sorry.";
+                    outputMessage = $"Vous n'êtes pas autorisé à{placeholder}, désolé.";
                     break;
                 case CommonErrors.InvalidModel:
-                    outputMessage = $"This model~r~{placeholder} ~s~could not be found, are you sure it's valid?";
+                    outputMessage = $"Le modèle~r~{placeholder} ~s~n'a pas pu être trouvé, êtes-vous sûr qu'il est valide ?";
                     break;
                 case CommonErrors.InvalidInput:
-                    outputMessage = $"The input~r~{placeholder} ~s~is invalid or you cancelled the action, please try again.";
+                    outputMessage = $"L'entrée~r~{placeholder} ~s~n'est pas valide ou vous avez annulé l'action, veuillez réessayer.";
                     break;
                 case CommonErrors.InvalidSaveName:
-                    outputMessage = $"Saving failed because the provided save name~r~{placeholder} ~s~is invalid.";
+                    outputMessage = $"L'enregistrement a échoué parce que le nom d'enregistrement fourni~r~{placeholder} ~s~est invalide.";
                     break;
                 case CommonErrors.SaveNameAlreadyExists:
-                    outputMessage = $"Saving failed because the provided save name~r~{placeholder} ~s~already exists.";
+                    outputMessage = $"L'enregistrement a échoué parce que le nom d'enregistrement fourni~r~{placeholder} ~s~existe déjà.";
                     break;
                 case CommonErrors.CouldNotLoadSave:
-                    outputMessage = $"Loading of~r~{placeholder} ~s~failed! Is the saves file corrupt?";
+                    outputMessage = $"Chargement de~r~{placeholder} ~s~échoué ! Le fichier de sauvegarde est-il corrompu ?";
                     break;
                 case CommonErrors.CouldNotLoad:
-                    outputMessage = $"Could not load~r~{placeholder}~s~, sorry!";
+                    outputMessage = $"Impossible de charger~r~{placeholder}~s~, désolé!";
                     break;
                 case CommonErrors.PedNotFound:
-                    outputMessage = $"The specified ped could not be found.{placeholder}";
+                    outputMessage = $"Le ped spécifié n'a pas pu être trouvé.{placeholder}";
                     break;
                 case CommonErrors.PlayerNotFound:
-                    outputMessage = $"The specified player could not be found.{placeholder}";
+                    outputMessage = $"Le joueur spécifié n'a pas pu être trouvé.{placeholder}";
                     break;
                 case CommonErrors.WalkingStyleNotForMale:
-                    outputMessage = $"This walking style is not available for male peds.{placeholder}";
+                    outputMessage = $"Ce style de marche n'est pas disponible pour les ped masculins.{placeholder}";
                     break;
                 case CommonErrors.WalkingStyleNotForFemale:
-                    outputMessage = $"This walking style is not available for female peds.{placeholder}";
+                    outputMessage = $"Ce style de marche n'est pas disponible pour les ped féminins.{placeholder}";
                     break;
                 case CommonErrors.RightAlignedNotSupported:
-                    outputMessage = $"Right aligned menus are not supported for ultra wide aspect ratios.{placeholder}";
+                    outputMessage = $"Les menus alignés à droite ne sont pas pris en charge pour les rapports d'aspect ultra larges.{placeholder}";
                     break;
 
                 case CommonErrors.UnknownError:
                 default:
-                    outputMessage = $"An unknown error occurred, sorry!{placeholder}";
+                    outputMessage = $"Une erreur inconnue s'est produite, désolé!{placeholder}";
                     break;
             }
             return outputMessage;
@@ -136,7 +136,7 @@ namespace vMenuClient
         /// <param name="saveToBrief">Should the notification be logged to the brief (PAUSE menu > INFO > Notifications)?</param>
         public static void Alert(string message, bool blink = true, bool saveToBrief = true)
         {
-            Custom("~y~~h~Alert~h~~s~: " + message, blink, saveToBrief);
+            Custom("~y~~h~Alerte~h~~s~: " + message, blink, saveToBrief);
         }
 
         /// <summary>
@@ -160,8 +160,8 @@ namespace vMenuClient
         /// <param name="saveToBrief">Should the notification be logged to the brief (PAUSE menu > INFO > Notifications)?</param>
         public static void Error(string message, bool blink = true, bool saveToBrief = true)
         {
-            Custom("~r~~h~Error~h~~s~: " + message, blink, saveToBrief);
-            Debug.Write("[vMenu] [ERROR] " + message + "\n");
+            Custom("~r~~h~Erreur~h~~s~: " + message, blink, saveToBrief);
+            Debug.Write("[vMenu] [ERREUR] " + message + "\n");
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace vMenuClient
         /// <param name="saveToBrief">Should the notification be logged to the brief (PAUSE menu > INFO > Notifications)?</param>
         public static void Success(string message, bool blink = true, bool saveToBrief = true)
         {
-            Custom("~g~~h~Success~h~~s~: " + message, blink, saveToBrief);
+            Custom("~g~~h~Succès~h~~s~: " + message, blink, saveToBrief);
         }
 
         /// <summary>
@@ -305,7 +305,7 @@ namespace vMenuClient
 
         private static Dictionary<Label, KeyValuePair<string, string>> labels = new Dictionary<Label, KeyValuePair<string, string>>()
         {
-            [Label.EXIT_INTERIOR_HELP_MESSAGE] = new KeyValuePair<string, string>("EXIT_INTERIOR_HELP_MESSAGE", "Press ~INPUT_CONTEXT~ to exit the building.")
+            [Label.EXIT_INTERIOR_HELP_MESSAGE] = new KeyValuePair<string, string>("EXIT_INTERIOR_HELP_MESSAGE", "Appuyez sur ~INPUT_CONTEXT~ pour sortir du bâtiment.")
         };
 
 

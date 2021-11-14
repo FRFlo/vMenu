@@ -153,7 +153,7 @@ namespace vMenuShared
                 if (string.IsNullOrEmpty(jsonFile))
                 {
 #if CLIENT
-                    vMenuClient.Notify.Error("The locations.json file is empty or does not exist, please tell the server owner to fix this.");
+                    vMenuClient.Notify.Error("Le fichier locations.json est vide ou n'existe pas, veuillez demander au propriétaire du serveur de le corriger.");
 #endif
 #if SERVER
                     vMenuServer.DebugLog.Log("The locations.json file is empty or does not exist, please fix this.", vMenuServer.DebugLog.LogLevel.error);
@@ -167,7 +167,7 @@ namespace vMenuShared
             catch (Exception e)
             {
 #if CLIENT
-                vMenuClient.Notify.Error("An error occurred while processing the locations.json file. Teleport Locations and Location Blips will be unavailable. Please correct any errors in the locations.json file.");
+                vMenuClient.Notify.Error("Une erreur s'est produite lors du traitement du fichier locations.json. Les emplacements de téléportation et les blips d'emplacement ne seront pas disponibles. Veuillez corriger toute erreur dans le fichier locations.json.");
 #endif
                 Debug.WriteLine($"[vMenu] json exception details: {e.Message}\nStackTrace:\n{e.StackTrace}");
             }

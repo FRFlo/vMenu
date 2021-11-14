@@ -63,7 +63,7 @@ namespace vMenuClient
         private void CreateMenu()
         {
             // Create the menu.
-            menu = new Menu(Game.Player.Name, "Vehicle Options");
+            menu = new Menu(Game.Player.Name, "Options du véhicule");
 
             #region menu items variables
             // vehicle god mode menu

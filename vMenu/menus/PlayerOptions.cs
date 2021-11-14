@@ -39,49 +39,49 @@ namespace vMenuClient
         {
             #region create menu and menu items
             // Create the menu.
-            menu = new Menu(Game.Player.Name, "Player Options");
+            menu = new Menu(Game.Player.Name, "Options du joueur");
 
             // Create all checkboxes.
-            MenuCheckboxItem playerGodModeCheckbox = new MenuCheckboxItem("Godmode", "Makes you invincible.", PlayerGodMode);
-            MenuCheckboxItem invisibleCheckbox = new MenuCheckboxItem("Invisible", "Makes you invisible to yourself and others.", PlayerInvisible);
-            MenuCheckboxItem unlimitedStaminaCheckbox = new MenuCheckboxItem("Unlimited Stamina", "Allows you to run forever without slowing down or taking damage.", PlayerStamina);
-            MenuCheckboxItem fastRunCheckbox = new MenuCheckboxItem("Fast Run", "Get ~g~Snail~s~ powers and run very fast!", PlayerFastRun);
+            MenuCheckboxItem playerGodModeCheckbox = new MenuCheckboxItem("Godmode", "Ça vous rend invincible.", PlayerGodMode);
+            MenuCheckboxItem invisibleCheckbox = new MenuCheckboxItem("Invisible", "Vous rend invisible à vous-même et aux autres.", PlayerInvisible);
+            MenuCheckboxItem unlimitedStaminaCheckbox = new MenuCheckboxItem("Endurance illimitée", "Permet de courir éternellement sans ralentir ni subir de dégâts.", PlayerStamina);
+            MenuCheckboxItem fastRunCheckbox = new MenuCheckboxItem("Course rapide", "Obtiens les pouvoirs de ~g~Serpent~s et cours très vite !", PlayerFastRun);
             SetRunSprintMultiplierForPlayer(Game.Player.Handle, (PlayerFastRun && IsAllowed(Permission.POFastRun) ? 1.49f : 1f));
-            MenuCheckboxItem fastSwimCheckbox = new MenuCheckboxItem("Fast Swim", "Get ~g~Snail 2.0~s~ powers and swim super fast!", PlayerFastSwim);
+            MenuCheckboxItem fastSwimCheckbox = new MenuCheckboxItem("Nage rapide", "Utilisez les pouvoirs de ~g~Serpent 2.0~s et nagez super vite !", PlayerFastSwim);
             SetSwimMultiplierForPlayer(Game.Player.Handle, (PlayerFastSwim && IsAllowed(Permission.POFastSwim) ? 1.49f : 1f));
-            MenuCheckboxItem superJumpCheckbox = new MenuCheckboxItem("Super Jump", "Get ~g~Snail 3.0~s~ powers and jump like a champ!", PlayerSuperJump);
-            MenuCheckboxItem noRagdollCheckbox = new MenuCheckboxItem("No Ragdoll", "Disables player ragdoll, makes you not fall off your bike anymore.", PlayerNoRagdoll);
-            MenuCheckboxItem neverWantedCheckbox = new MenuCheckboxItem("Never Wanted", "Disables all wanted levels.", PlayerNeverWanted);
-            MenuCheckboxItem everyoneIgnoresPlayerCheckbox = new MenuCheckboxItem("Everyone Ignore Player", "Everyone will leave you alone.", PlayerIsIgnored);
-            MenuCheckboxItem playerStayInVehicleCheckbox = new MenuCheckboxItem("Stay In Vehicle", "When this is enabled, NPCs will not be able to drag you out of your vehicle if they get angry at you.", PlayerStayInVehicle);
-            MenuCheckboxItem playerFrozenCheckbox = new MenuCheckboxItem("Freeze Player", "Freezes your current location.", PlayerFrozen);
+            MenuCheckboxItem superJumpCheckbox = new MenuCheckboxItem("Super Saut", "Obtenez les pouvoirs de ~g~Serpent 3.0~s et sautez comme un champion !", PlayerSuperJump);
+            MenuCheckboxItem noRagdollCheckbox = new MenuCheckboxItem("Aucun Ragdoll", "Désactive le ragdoll du joueur, fait que vous ne tombez plus de votre vélo.", PlayerNoRagdoll);
+            MenuCheckboxItem neverWantedCheckbox = new MenuCheckboxItem("Jamais recherché", "Désactive tous les niveaux de recherche.", PlayerNeverWanted);
+            MenuCheckboxItem everyoneIgnoresPlayerCheckbox = new MenuCheckboxItem("Tout le monde ignore le joueur", "Tout le monde vous laissera tranquille.", PlayerIsIgnored);
+            MenuCheckboxItem playerStayInVehicleCheckbox = new MenuCheckboxItem("Rester dans le véhicule", "Lorsque cette option est activée, les PNJ ne pourront pas vous traîner hors de votre véhicule s'ils se mettent en colère contre vous.", PlayerStayInVehicle);
+            MenuCheckboxItem playerFrozenCheckbox = new MenuCheckboxItem("Geler le joueur", "Gèle votre position actuelle.", PlayerFrozen);
 
             // Wanted level options
-            List<string> wantedLevelList = new List<string> { "No Wanted Level", "1", "2", "3", "4", "5" };
-            MenuListItem setWantedLevel = new MenuListItem("Set Wanted Level", wantedLevelList, GetPlayerWantedLevel(Game.Player.Handle), "Set your wanted level by selecting a value, and pressing enter.");
-            MenuListItem setArmorItem = new MenuListItem("Set Armor Type", new List<string> { "No Armor", GetLabelText("WT_BA_0"), GetLabelText("WT_BA_1"), GetLabelText("WT_BA_2"), GetLabelText("WT_BA_3"), GetLabelText("WT_BA_4"), }, 0, "Set the armor level/type for your player.");
+            List<string> wantedLevelList = new List<string> { "Non recherché", "1", "2", "3", "4", "5" };
+            MenuListItem setWantedLevel = new MenuListItem("Définir le niveau souhaité", wantedLevelList, GetPlayerWantedLevel(Game.Player.Handle), "Définissez votre niveau souhaité en sélectionnant une valeur et en appuyant sur la touche Entrée.");
+            MenuListItem setArmorItem = new MenuListItem("Définir le type d'armure", new List<string> { "Pas d'armure", GetLabelText("WT_BA_0"), GetLabelText("WT_BA_1"), GetLabelText("WT_BA_2"), GetLabelText("WT_BA_3"), GetLabelText("WT_BA_4"), }, 0, "Définissez le niveau/type d'armure de votre joueur.");
 
-            MenuItem healPlayerBtn = new MenuItem("Heal Player", "Give the player max health.");
-            MenuItem cleanPlayerBtn = new MenuItem("Clean Player Clothes", "Clean your player clothes.");
-            MenuItem dryPlayerBtn = new MenuItem("Dry Player Clothes", "Make your player clothes dry.");
-            MenuItem wetPlayerBtn = new MenuItem("Wet Player Clothes", "Make your player clothes wet.");
-            MenuItem suicidePlayerBtn = new MenuItem("~r~Commit Suicide", "Kill yourself by taking the pill. Or by using a pistol if you have one.");
+            MenuItem healPlayerBtn = new MenuItem("Soigner le joueur", "Donnez au joueur une santé maximale.");
+            MenuItem cleanPlayerBtn = new MenuItem("Nettoyer les vêtements du joueur", "Nettoyez les vêtements du joueur.");
+            MenuItem dryPlayerBtn = new MenuItem("Vêtements de joueur à sec", "Faites sécher les vêtements du joueur.");
+            MenuItem wetPlayerBtn = new MenuItem("Vêtements de joueur mouillés", "Mouillez les vêtements du joueur.");
+            MenuItem suicidePlayerBtn = new MenuItem("~r~Se suicider", "Tuez-vous en prenant la pilule. Ou en utilisant un pistolet si vous en avez un.");
 
-            Menu vehicleAutoPilot = new Menu("Auto Pilot", "Vehicle auto pilot options.");
+            Menu vehicleAutoPilot = new Menu("Pilote automatique", "Options de pilotage automatique du véhicule.");
 
             MenuController.AddSubmenu(menu, vehicleAutoPilot);
 
-            MenuItem vehicleAutoPilotBtn = new MenuItem("Vehicle Auto Pilot Menu", "Manage vehicle auto pilot options.")
+            MenuItem vehicleAutoPilotBtn = new MenuItem("Menu du pilote automatique du véhicule", "Gérer les options de pilotage automatique des véhicules.")
             {
                 Label = "→→→"
             };
 
-            List<string> drivingStyles = new List<string>() { "Normal", "Rushed", "Avoid highways", "Drive in reverse", "Custom" };
-            MenuListItem drivingStyle = new MenuListItem("Driving Style", drivingStyles, 0, "Set the driving style that is used for the Drive to Waypoint and Drive Around Randomly functions.");
+            List<string> drivingStyles = new List<string>() { "Normal", "Pressé", "Éviter les autoroutes", "Conduire en marche arrière", "Custom" };
+            MenuListItem drivingStyle = new MenuListItem("Style de conduite", drivingStyles, 0, "Définissez le style de conduite utilisé pour les fonctions Conduire vers un point de passage et Conduire de façon aléatoire.");
 
             // Scenarios (list can be found in the PedScenarios class)
-            MenuListItem playerScenarios = new MenuListItem("Player Scenarios", PedScenarios.Scenarios, 0, "Select a scenario and hit enter to start it. Selecting another scenario will override the current scenario. If you're already playing the selected scenario, selecting it again will stop the scenario.");
-            MenuItem stopScenario = new MenuItem("Force Stop Scenario", "This will force a playing scenario to stop immediately, without waiting for it to finish it's 'stopping' animation.");
+            MenuListItem playerScenarios = new MenuListItem("Scénarios", PedScenarios.Scenarios, 0, "Sélectionnez un scénario et appuyez sur la touche Entrée pour le lancer. La sélection d'un autre scénario remplacera le scénario en cours. Si vous êtes déjà en train de jouer le scénario sélectionné, le sélectionner à nouveau arrêtera le scénario.");
+            MenuItem stopScenario = new MenuItem("Arrêt forcé du scénario", "Cela forcera un scénario à s'arrêter immédiatement, sans attendre qu'il termine son animation d'arrêt.");
             #endregion
 
             #region add items to menu based on permissions
@@ -236,11 +236,11 @@ namespace vMenuClient
                                     {
                                         int style = GetStyleFromIndex(drivingStyle.ListIndex);
                                         DriveToWp(style);
-                                        Notify.Info("Your player ped is now driving the vehicle for you. You can cancel any time by pressing the Stop Driving button. The vehicle will stop when it has reached the destination.");
+                                        Notify.Info("Votre Ped conduit maintenant le véhicule à votre place. Vous pouvez annuler à tout moment en appuyant sur le bouton Arrêter la conduite. Le véhicule s'arrêtera lorsqu'il aura atteint sa destination.");
                                     }
                                     else
                                     {
-                                        Notify.Error("You need a waypoint before you can drive to it!");
+                                        Notify.Error("Vous avez besoin d'un waypoint avant de pouvoir vous y rendre !");
                                     }
 
                                 }
@@ -248,22 +248,22 @@ namespace vMenuClient
                                 {
                                     int style = GetStyleFromIndex(drivingStyle.ListIndex);
                                     DriveWander(style);
-                                    Notify.Info("Your player ped is now driving the vehicle for you. You can cancel any time by pressing the Stop Driving button.");
+                                    Notify.Info("Votre Ped conduit maintenant le véhicule à votre place. Vous pouvez annuler à tout moment en appuyant sur le bouton 'Arrêtez de conduire'.");
                                 }
                             }
                             else
                             {
-                                Notify.Error("You must be the driver of this vehicle!");
+                                Notify.Error("Vous devez être le conducteur de ce véhicule !");
                             }
                         }
                         else
                         {
-                            Notify.Error("Your vehicle is broken or it does not exist!");
+                            Notify.Error("Votre véhicule est en panne ou il n'existe pas !");
                         }
                     }
                     else if (item != stopDriving && item != forceStopDriving)
                     {
-                        Notify.Error("You need to be in a vehicle first!");
+                        Notify.Error("Vous devez d'abord être dans un véhicule !");
                     }
                     if (item == stopDriving)
                     {
@@ -275,7 +275,7 @@ namespace vMenuClient
                                 Vector3 outPos = new Vector3();
                                 if (GetNthClosestVehicleNode(Game.PlayerPed.Position.X, Game.PlayerPed.Position.Y, Game.PlayerPed.Position.Z, 3, ref outPos, 0, 0, 0))
                                 {
-                                    Notify.Info("The player ped will find a suitable place to park the car and will then stop driving. Please wait.");
+                                    Notify.Info("Le Ped du joueur trouvera un endroit approprié pour garer la voiture et s'arrêtera ensuite de conduire. Veuillez patienter.");
                                     ClearPedTasks(Game.PlayerPed.Handle);
                                     TaskVehiclePark(Game.PlayerPed.Handle, veh.Handle, outPos.X, outPos.Y, outPos.Z, Game.PlayerPed.Heading, 3, 60f, true);
                                     while (Game.PlayerPed.Position.DistanceToSquared2D(outPos) > 3f)
@@ -284,20 +284,20 @@ namespace vMenuClient
                                     }
                                     SetVehicleHalt(veh.Handle, 3f, 0, false);
                                     ClearPedTasks(Game.PlayerPed.Handle);
-                                    Notify.Info("The player ped has stopped driving.");
+                                    Notify.Info("Le ped a arrêté de conduire.");
                                 }
                             }
                         }
                         else
                         {
                             ClearPedTasks(Game.PlayerPed.Handle);
-                            Notify.Alert("Your ped is not in any vehicle.");
+                            Notify.Alert("Votre Ped n'est pas dans un véhicule.");
                         }
                     }
                     else if (item == forceStopDriving)
                     {
                         ClearPedTasks(Game.PlayerPed.Handle);
-                        Notify.Info("Driving task cancelled.");
+                        Notify.Info("Conduite automatique annulée.");
                     }
                 };
 
@@ -307,7 +307,7 @@ namespace vMenuClient
                     {
                         int style = GetStyleFromIndex(listIndex);
                         SetDriveTaskDrivingStyle(Game.PlayerPed.Handle, style);
-                        Notify.Info($"Driving task style is now set to: ~r~{drivingStyles[listIndex]}~s~.");
+                        Notify.Info($"Le style de conduite est maintenant réglé sur : ~r~{drivingStyles[listIndex]}~s~.");
                     }
                 };
             }
@@ -442,22 +442,22 @@ namespace vMenuClient
                 else if (item == healPlayerBtn)
                 {
                     Game.PlayerPed.Health = Game.PlayerPed.MaxHealth;
-                    Notify.Success("Player healed.");
+                    Notify.Success("Joueur soigné.");
                 }
                 else if (item == cleanPlayerBtn)
                 {
                     Game.PlayerPed.ClearBloodDamage();
-                    Notify.Success("Player clothes have been cleaned.");
+                    Notify.Success("Les vêtements des joueurs ont été nettoyés.");
                 }
                 else if (item == dryPlayerBtn)
                 {
                     Game.PlayerPed.WetnessHeight = 0f;
-                    Notify.Success("Player is now dry.");
+                    Notify.Success("Le joueur est maintenant sec.");
                 }
                 else if (item == wetPlayerBtn)
                 {
                     Game.PlayerPed.WetnessHeight = 2f;
-                    Notify.Success("Player is now wet.");
+                    Notify.Success("Le joueur est maintenant mouillé.");
                 }
                 else if (item == suicidePlayerBtn)
                 {

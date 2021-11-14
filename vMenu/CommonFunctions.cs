@@ -97,12 +97,12 @@ namespace vMenuClient
                 }
                 if (lockDoors)
                 {
-                    Subtitle.Custom("Vehicle doors are now locked.");
+                    Subtitle.Custom("Les portes du véhicule sont maintenant verrouillées.");
                     SetVehicleDoorsLockedForAllPlayers(veh.Handle, true);
                 }
                 else
                 {
-                    Subtitle.Custom("Vehicle doors are now unlocked.");
+                    Subtitle.Custom("Les portes du véhicule sont maintenant déverrouillées.");
                     SetVehicleDoorsLockedForAllPlayers(veh.Handle, false);
                 }
             }
@@ -376,8 +376,8 @@ namespace vMenuClient
         /// </summary>
         public static async void QuitGame()
         {
-            Notify.Info("The game will exit in 5 seconds.");
-            Debug.WriteLine("Game will be terminated in 5 seconds, because the player used the Quit Game option in vMenu.");
+            Notify.Info("Le jeu se terminera dans 5 secondes.");
+            Debug.WriteLine("Le jeu se terminera dans 5 secondes, car le joueur a utilisé l'option Quitter le jeu dans le vMenu.");
             await BaseScript.Delay(5000);
             ForceSocialClubUpdate(); // bye bye
         }
@@ -402,7 +402,7 @@ namespace vMenuClient
                     Ped playerPedObj = player.Character;
                     if (Game.PlayerPed == playerPedObj)
                     {
-                        Notify.Error("Sorry, you can ~r~~h~not~h~ ~s~teleport to yourself!");
+                        Notify.Error("Désolé, vous ne pouvez ~r~~h~pas~h~ ~s~vous téléporter vers vous-même !");
                         return;
                     }
 
@@ -459,7 +459,7 @@ namespace vMenuClient
                             if (vehicle.Exists() && !vehicle.IsDead && IsAnyVehicleSeatEmpty(vehicle.Handle))
                             {
                                 TaskWarpPedIntoVehicle(Game.PlayerPed.Handle, vehicle.Handle, (int)VehicleSeat.Any);
-                                Notify.Success("Teleported into ~g~<C>" + GetPlayerName(playerId) + "</C>'s ~s~vehicle.");
+                                Notify.Success("Téléporté dans le véhicule de ~g~<C>" + GetPlayerName(playerId) + "</C>'s ~s~.");
                             }
                             // If there are not enough empty vehicle seats or the vehicle doesn't exist/is dead then notify the user.
                             else
@@ -467,12 +467,12 @@ namespace vMenuClient
                                 // If there's only one seat on this vehicle, tell them that it's a one-seater.
                                 if (totalVehicleSeats == 1)
                                 {
-                                    Notify.Error("This vehicle only has room for 1 player!");
+                                    Notify.Error("Ce véhicule ne peut accueillir qu'un seul joueur !");
                                 }
                                 // Otherwise, tell them there's not enough empty seats remaining.
                                 else
                                 {
-                                    Notify.Error("Not enough empty vehicle seats remaining!");
+                                    Notify.Error("Il ne reste plus assez de sièges vides dans les véhicules !");
                                 }
                             }
                         }
@@ -482,13 +482,13 @@ namespace vMenuClient
                 // Notify the user.
                 else
                 {
-                    Notify.Success("Teleported to ~y~<C>" + GetPlayerName(playerId) + "</C>~s~.");
+                    Notify.Success("Téléporté à ~y~<C>" + GetPlayerName(playerId) + "</C>~s~.");
                 }
             }
             // The specified playerId does not exist, notify the user of the error.
             else
             {
-                Notify.Error(CommonErrors.PlayerNotFound, placeholderValue: "So the teleport has been cancelled.");
+                Notify.Error(CommonErrors.PlayerNotFound, placeholderValue: "Donc la téléportation a été annulée.");
             }
         }
         #endregion
@@ -641,7 +641,7 @@ namespace vMenuClient
                     GetNthClosestVehicleNode(pos.X, pos.Y, pos.Z, 0, ref safePos, 0, 0, 0);
 
                     // Notify the user that the ground z coord couldn't be found, so we will place them on a nearby road instead.
-                    Notify.Alert("Could not find a safe ground coord. Placing you on the nearest road instead.");
+                    Notify.Alert("Impossible de trouver une coordonnée au sol sûre. Je vous place sur la route la plus proche à la place.");
                     Log("Could not find a safe ground coord. Placing you on the nearest road instead.");
 
                     // Teleport vehicle, or player.
@@ -714,7 +714,7 @@ namespace vMenuClient
             }
             else
             {
-                Notify.Error("You need to set a waypoint first!");
+                Notify.Error("Vous devez d'abord définir un waypoint !");
             }
         }
         #endregion
@@ -726,24 +726,24 @@ namespace vMenuClient
         /// <param name="player"></param>
         /// <param name="askUserForReason"></param>
         /// <param name="providedReason"></param>
-        public static async void KickPlayer(IPlayer player, bool askUserForReason, string providedReason = "You have been kicked.")
+        public static async void KickPlayer(IPlayer player, bool askUserForReason, string providedReason = "Vous avez été expulsé.")
         {
             if (player != null)
             {
                 // Default kick reason.
-                string defaultReason = "You have been kicked.";
+                string defaultReason = "Vous avez été expulsé.";
                 // If we need to ask for the user's input and the default reason is the same as the provided reason, get the user input..
                 if (askUserForReason && providedReason == defaultReason)
                 {
-                    string userInput = await GetUserInput(windowTitle: "Enter Kick Message", maxInputLength: 100);
+                    string userInput = await GetUserInput(windowTitle: "Entrer le message d'expulsion", maxInputLength: 100);
                     // If the input is not invalid, set the kick reason to the user's custom message.
                     if (!string.IsNullOrEmpty(userInput))
                     {
-                        defaultReason += $" Reason: {userInput}";
+                        defaultReason += $" Raison: {userInput}";
                     }
                     else
                     {
-                        Notify.Error("An invalid kick reason was provided. Action cancelled.");
+                        Notify.Error("Un motif d'expulsion invalide a été fourni. Action annulée.");
                         return;
                     }
                 }
@@ -753,7 +753,7 @@ namespace vMenuClient
             }
             else
             {
-                Notify.Error("The selected player is somehow invalid, action aborted.");
+                Notify.Error("Le joueur sélectionné n'est pas valide, l'action est annulée.");
             }
         }
         #endregion
@@ -775,7 +775,7 @@ namespace vMenuClient
                 }
                 else
                 {
-                    string banDurationHours = await GetUserInput(windowTitle: "Ban Duration (in hours) - Max: 720 (1 month)", defaultText: "1.5", maxInputLength: 10);
+                    string banDurationHours = await GetUserInput(windowTitle: "Durée du ban (en heures) - Max: 720 (1 mois)", defaultText: "1.5", maxInputLength: 10);
                     if (!string.IsNullOrEmpty(banDurationHours))
                     {
                         if (double.TryParse(banDurationHours, out double banHours))
@@ -783,7 +783,7 @@ namespace vMenuClient
                             if (banHours > 0.0)
                                 TriggerServerEvent("vMenu:TempBanPlayer", player.ServerId, banHours, banReason);
                             else
-                                Notify.Error("You need to enter a ban duration, enter a value ~h~between~h~ 1 and 720!");
+                                Notify.Error("Vous devez entrer une durée d'interdiction, entrez une valeur ~h~entre ~h~ 1 et 720 !");
                         }
                         else
                         {
@@ -792,19 +792,19 @@ namespace vMenuClient
                                 if ((double)banHoursInt > 0.0)
                                     TriggerServerEvent("vMenu:TempBanPlayer", player.ServerId, (double)banHoursInt, banReason);
                                 else
-                                    Notify.Error("You need to enter a ban duration, enter a value ~h~between~h~ 1 and 720!");
+                                    Notify.Error("Vous devez entrer une durée d'interdiction, entrez une valeur ~h~entre ~h~ 1 et 720 !");
                             }
                             else
                             {
                                 Notify.Error(CommonErrors.InvalidInput);
-                                TriggerEvent("chatMessage", $"[vMenu] The input is invalid or you cancelled the action, please try again.");
+                                TriggerEvent("chatMessage", $"[vMenu] L'entrée n'est pas valide ou vous avez annulé l'action, veuillez réessayer.");
                             }
                         }
                     }
                     else
                     {
                         Notify.Error(CommonErrors.InvalidInput);
-                        TriggerEvent("chatMessage", $"[vMenu] The input is invalid or you cancelled the action, please try again.");
+                        TriggerEvent("chatMessage", $"[vMenu] L'entrée n'est pas valide ou vous avez annulé l'action, veuillez réessayer.");
                     }
 
                 }
@@ -812,7 +812,7 @@ namespace vMenuClient
             else
             {
                 Notify.Error(CommonErrors.InvalidInput);
-                TriggerEvent("chatMessage", $"[vMenu] The input is invalid or you cancelled the action, please try again.");
+                TriggerEvent("chatMessage", $"[vMenu] L'entrée n'est pas valide ou vous avez annulé l'action, veuillez réessayer.");
             }
         }
         #endregion
@@ -963,12 +963,12 @@ namespace vMenuClient
                         while (IsScreenFadingOut()) await Delay(0);
                         NetworkSetInSpectatorMode(false, 0); // disable spectating.
                         DoScreenFadeIn(500);
-                        Notify.Success("Stopped spectating.", false, true);
+                        Notify.Success("Observation stoppée", false, true);
                         currentlySpectatingPlayer = -1;
                     }
                     else
                     {
-                        Notify.Error("You can't spectate yourself.", false, true);
+                        Notify.Error("Vous ne pouvez pas vous observer tout seul.", false, true);
                     }
                 }
                 else
@@ -987,7 +987,7 @@ namespace vMenuClient
                             }
 
                             DoScreenFadeIn(500);
-                            Notify.Success($"You are now spectating ~g~<C>{GetSafePlayerName(player.Name)}</C>~s~.", false, true);
+                            Notify.Success($"Vous êtes maintenant spectateur ~g~<C>{GetSafePlayerName(player.Name)}</C>~s~.", false, true);
                             currentlySpectatingPlayer = player.Handle;
                         }
                         else
@@ -996,7 +996,7 @@ namespace vMenuClient
                             while (IsScreenFadingOut()) await Delay(0);
                             NetworkSetInSpectatorMode(false, 0); // disable spectating.
                             DoScreenFadeIn(500);
-                            Notify.Success("Stopped spectating.", false, true);
+                            Notify.Success("Vous avez cessé d'être spectateur.", false, true);
                             currentlySpectatingPlayer = -1;
                         }
                     }
@@ -1014,7 +1014,7 @@ namespace vMenuClient
                             }
 
                             DoScreenFadeIn(500);
-                            Notify.Success($"You are now spectating ~g~<C>{GetSafePlayerName(player.Name)}</C>~s~.", false, true);
+                            Notify.Success($"Vous êtes maintenant spectateur de ~g~<C>{GetSafePlayerName(player.Name)}</C>~s~.", false, true);
                             currentlySpectatingPlayer = player.Handle;
                         }
                     }
@@ -1095,7 +1095,7 @@ namespace vMenuClient
             }
             else
             {
-                Notify.Alert("There are no more available seats to cycle through.");
+                Notify.Alert("Il n'y a plus de sièges disponibles à parcourir.");
             }
         }
         #endregion
@@ -1158,7 +1158,7 @@ namespace vMenuClient
             int modelClass = GetVehicleClassFromName(vehicleHash);
             if (!VehicleSpawner.allowedCategories[modelClass])
             {
-                Notify.Alert("You are not allowed to spawn this vehicle, because it belongs to a category which is restricted by the server owner.");
+                Notify.Alert("Vous n'êtes pas autorisé à spawn ce véhicule, car il appartient à une catégorie qui est restreinte par le propriétaire du serveur.");
                 return 0;
             }
 
@@ -1228,7 +1228,7 @@ namespace vMenuClient
                         }
                     }
                     tmpveh.Delete();
-                    Notify.Info("Your old car was removed to prevent your new car from glitching inside it. Next time, get out of your vehicle before spawning a new one if you want to keep your old one.");
+                    Notify.Info("Votre ancienne voiture a été retirée pour empêcher votre nouvelle voiture de s'y glisser. La prochaine fois, sortez de votre véhicule avant d'en faire apparaître un nouveau si vous voulez garder l'ancien.");
                 }
             }
 
@@ -1502,7 +1502,7 @@ namespace vMenuClient
                     if (updateExistingSavedVehicleName == null)
                     {
                         // Ask the user for a save name (will be displayed to the user and will be used as unique identifier for this vehicle)
-                        var saveName = await GetUserInput(windowTitle: "Enter a save name", maxInputLength: 30);
+                        var saveName = await GetUserInput(windowTitle: "Entrez un nom d'enregistrement", maxInputLength: 30);
                         // If the name is not invalid.
                         if (!string.IsNullOrEmpty(saveName))
                         {
@@ -1510,7 +1510,7 @@ namespace vMenuClient
                             // If the save was successfull:
                             if (StorageManager.SaveVehicleInfo("veh_" + saveName, vi, false))
                             {
-                                Notify.Success($"Vehicle {saveName} saved.");
+                                Notify.Success($"Véhicule {saveName} sauvegardé.");
                             }
                             // If the save was not successfull:
                             else
@@ -1534,7 +1534,7 @@ namespace vMenuClient
                 // The player is not inside a vehicle, or the vehicle is dead/not existing so we won't do anything. Only alert the user.
                 else
                 {
-                    Notify.Error(CommonErrors.NoVehicle, placeholderValue: "to save it");
+                    Notify.Error(CommonErrors.NoVehicle, placeholderValue: "pour le sauvegarder");
                 }
             }
             // The player is not inside a vehicle.
@@ -1710,7 +1710,7 @@ namespace vMenuClient
                 if (Game.PlayerPed == veh.Driver)
                 {
                     // Get the input.
-                    var text = await GetUserInput(windowTitle: "Enter License Plate", defaultText: veh.Mods.LicensePlate ?? "", maxInputLength: 8);
+                    var text = await GetUserInput(windowTitle: "Entrez la plaque d'immatriculation", defaultText: veh.Mods.LicensePlate ?? "", maxInputLength: 8);
                     // If the input is valid.
                     if (!string.IsNullOrEmpty(text))
                     {
@@ -1809,42 +1809,42 @@ namespace vMenuClient
                 // Check if the player CAN play a scenario... 
                 if (IsPedRunning(Game.PlayerPed.Handle))
                 {
-                    Notify.Alert("You can't start a scenario when you are running.", true, false);
+                    Notify.Alert("Vous ne pouvez pas lancer un scénario lorsque vous êtes en train de courir.", true, false);
                     canPlay = false;
                 }
                 if (IsEntityDead(Game.PlayerPed.Handle))
                 {
-                    Notify.Alert("You can't start a scenario when you are dead.", true, false);
+                    Notify.Alert("Vous ne pouvez pas commencer un scénario quand vous êtes mort.", true, false);
                     canPlay = false;
                 }
                 if (IsPlayerInCutscene(Game.PlayerPed.Handle))
                 {
-                    Notify.Alert("You can't start a scenario when you are in a cutscene.", true, false);
+                    Notify.Alert("Vous ne pouvez pas commencer un scénario lorsque vous êtes dans une cutscene.", true, false);
                     canPlay = false;
                 }
                 if (IsPedFalling(Game.PlayerPed.Handle))
                 {
-                    Notify.Alert("You can't start a scenario when you are falling.", true, false);
+                    Notify.Alert("Vous ne pouvez pas commencer un scénario quand vous êtes en train de tomber.", true, false);
                     canPlay = false;
                 }
                 if (IsPedRagdoll(Game.PlayerPed.Handle))
                 {
-                    Notify.Alert("You can't start a scenario when you are currently in a ragdoll state.", true, false);
+                    Notify.Alert("Vous ne pouvez pas commencer un scénario lorsque vous êtes actuellement dans un état de ragdoll.", true, false);
                     canPlay = false;
                 }
                 if (!IsPedOnFoot(Game.PlayerPed.Handle))
                 {
-                    Notify.Alert("You must be on foot to start a scenario.", true, false);
+                    Notify.Alert("Vous devez être à pied pour commencer un scénario.", true, false);
                     canPlay = false;
                 }
                 if (NetworkIsInSpectatorMode())
                 {
-                    Notify.Alert("You can't start a scenario when you are currently spectating.", true, false);
+                    Notify.Alert("Vous ne pouvez pas commencer un scénario lorsque vous êtes actuellement spectateur.", true, false);
                     canPlay = false;
                 }
                 if (GetEntitySpeed(Game.PlayerPed.Handle) > 5.0f)
                 {
-                    Notify.Alert("You can't start a scenario when you are moving too fast.", true, false);
+                    Notify.Alert("Vous ne pouvez pas lancer un scénario si vous allez trop vite.", true, false);
                     canPlay = false;
                 }
 
@@ -2137,7 +2137,7 @@ namespace vMenuClient
                 else
                 {
                     // notify user of unsupported version
-                    Notify.Error("This is an unsupported saved ped version. Cannot restore appearance. :(");
+                    Notify.Error("Il s'agit d'une version de ped enregistrée non prise en charge. Impossible de restaurer l'apparence. :(");
                 }
                 if (keepWeapons)
                 {
@@ -2168,7 +2168,7 @@ namespace vMenuClient
         /// </summary>
         public static async void SpawnPedByName()
         {
-            string input = await GetUserInput(windowTitle: "Enter Ped Model Name", maxInputLength: 30);
+            string input = await GetUserInput(windowTitle: "Entrez le nom du modèle de ped.", maxInputLength: 30);
             if (!string.IsNullOrEmpty(input))
             {
                 await SetPlayerSkin((uint)GetHashKey(input), new PedInfo() { version = -1 });
@@ -2190,7 +2190,7 @@ namespace vMenuClient
             if (string.IsNullOrEmpty(name))
             {
                 // Get the save name.
-                name = await GetUserInput(windowTitle: "Enter a ped save name", maxInputLength: 30);
+                name = await GetUserInput(windowTitle: "Entrez le nom d'enregistrement du ped.", maxInputLength: 30);
             }
 
             // If the save name is not invalid.
@@ -2236,7 +2236,7 @@ namespace vMenuClient
                 data.isMpPed = (model == (uint)GetHashKey("mp_f_freemode_01") || model == (uint)GetHashKey("mp_m_freemode_01"));
                 if (data.isMpPed)
                 {
-                    Notify.Alert("Note, you should probably use the MP Character creator if you want more advanced features. Saving Multiplayer characters with this function does NOT save a lot of the online peds customization.");
+                    Notify.Alert("Notez que vous devriez probablement utiliser le créateur de personnage MP si vous voulez des fonctionnalités plus avancées. La sauvegarde des personnages multijoueurs avec cette fonction ne permet PAS de sauvegarder une grande partie de la personnalisation des peds en ligne.");
                 }
 
                 // Try to save the data, and save the result in a variable.
@@ -2449,7 +2449,7 @@ namespace vMenuClient
         /// </summary>
         public static async void SetAllWeaponsAmmo()
         {
-            string inputAmmo = await GetUserInput(windowTitle: "Enter Ammo Amount", defaultText: "100");
+            string inputAmmo = await GetUserInput(windowTitle: "Entrez la quantité de munitions", defaultText: "999");
             if (!string.IsNullOrEmpty(inputAmmo))
             {
                 if (int.TryParse(inputAmmo, out int ammo))
@@ -2464,7 +2464,7 @@ namespace vMenuClient
                 }
                 else
                 {
-                    Notify.Error("You did not enter a valid number.");
+                    Notify.Error("Vous n'avez pas saisi un nombre valide.");
                 }
             }
             else
@@ -2479,14 +2479,14 @@ namespace vMenuClient
         public static async void SpawnCustomWeapon()
         {
             int ammo = 900;
-            string inputName = await GetUserInput(windowTitle: "Enter Weapon Model Name", maxInputLength: 30);
+            string inputName = await GetUserInput(windowTitle: "Entrez le nom du modèle de l'arme", maxInputLength: 30);
             if (!string.IsNullOrEmpty(inputName))
             {
                 if (!ValidWeapons.weaponPermissions.ContainsKey(inputName.ToLower()))
                 {
                     if (!IsAllowed(Permission.WPSpawn))
                     {
-                        Notify.Error("Sorry, you do not have permission to spawn this weapon.");
+                        Notify.Error("Désolé, vous n'avez pas la permission de créer cette arme.");
                         return;
                     }
                 }
@@ -2494,7 +2494,7 @@ namespace vMenuClient
                 {
                     if (!IsAllowed(ValidWeapons.weaponPermissions[inputName.ToLower()]))
                     {
-                        Notify.Error("Sorry, you are not allowed to spawn that weapon by name because it's a restricted weapon.");
+                        Notify.Error("Désolé, vous n'êtes pas autorisé à faire apparaître cette arme par son nom car c'est une arme à usage restreint.");
                         return;
                     }
                 }
@@ -2504,11 +2504,11 @@ namespace vMenuClient
                 if (IsWeaponValid(model))
                 {
                     GiveWeaponToPed(Game.PlayerPed.Handle, model, ammo, false, true);
-                    Notify.Success("Added weapon to inventory.");
+                    Notify.Success("Ajout d'une arme à l'inventaire.");
                 }
                 else
                 {
-                    Notify.Error($"This ({inputName}) is not a valid weapon model name, or the model hash ({model}) could not be found in the game files.");
+                    Notify.Error($"({inputName}) n'est pas un nom de modèle d'arme valide, ou le hach ({model}) n'a pas pu être trouvé dans les fichiers du jeu.");
                 }
             }
             else
@@ -2591,7 +2591,7 @@ namespace vMenuClient
                 // Check if any weapon is not allowed.
                 if (!ignoreSettingsAndPerms && loadout.Any((wp) => !IsAllowed(wp.Perm)))
                 {
-                    Notify.Alert("One or more weapon(s) in this saved loadout are not allowed on this server. Those weapons will not be loaded.");
+                    Notify.Alert("Une ou plusieurs armes de ce chargement sauvegardé ne sont pas autorisées sur ce serveur. Ces armes ne seront pas chargées.");
                 }
 
                 foreach (ValidWeapon w in loadout)
@@ -2659,7 +2659,7 @@ namespace vMenuClient
                 SetCurrentPedWeapon(Game.PlayerPed.Handle, (uint)GetHashKey("weapon_unarmed"), true);
 
                 if (!(saveName == "vmenu_temp_weapons_loadout_before_respawn" || dontNotify))
-                    Notify.Success("Weapon loadout spawned.");
+                    Notify.Success("Chargement d'armes fait.");
             }
         }
 
@@ -2811,7 +2811,7 @@ namespace vMenuClient
             }
             else
             {
-                Notify.Error("This feature only supports the multiplayer freemode male/female ped models.");
+                Notify.Error("Cette fonctionnalité ne prend en charge que les modèles de pédales multijoueurs freemode masculin/féminin.");
             }
         }
         #endregion
@@ -2896,12 +2896,14 @@ namespace vMenuClient
                 if (GetBlipSprite(blip) != blipSprite)
                 {
                     SetBlipSprite(blip, blipSprite);
+                    SetBlipCategory(blip, 7);
                 }
 
             }
             else
             {
                 SetBlipSprite(blip, 1);
+                SetBlipCategory(blip, 7);
             }
         }
         #endregion
@@ -3136,7 +3138,7 @@ namespace vMenuClient
             await MainMenu.PlayersList.WaitRequested();
 
             string name = MainMenu.PlayersList.ToList()
-                .Find(plr => plr.ServerId.ToString() == source)?.Name ?? "**Invalid**";
+                .Find(plr => plr.ServerId.ToString() == source)?.Name ?? "**Invalide**";
 
             if (MainMenu.MiscSettingsMenu == null || MainMenu.MiscSettingsMenu.MiscDisablePrivateMessages)
             {
@@ -3168,22 +3170,22 @@ namespace vMenuClient
                     string headshotTxd = GetPedheadshotTxdString(headshotHandle);
                     if (sent)
                     {
-                        Notify.CustomImage(headshotTxd, headshotTxd, message, $"<C>{GetSafePlayerName(name)}</C>", "Message Sent", true, 1);
+                        Notify.CustomImage(headshotTxd, headshotTxd, message, $"<C>{GetSafePlayerName(name)}</C>", "Message envoyé", true, 1);
                     }
                     else
                     {
-                        Notify.CustomImage(headshotTxd, headshotTxd, message, $"<C>{GetSafePlayerName(name)}</C>", "Message Received", true, 1);
+                        Notify.CustomImage(headshotTxd, headshotTxd, message, $"<C>{GetSafePlayerName(name)}</C>", "Message reçu", true, 1);
                     }
                 }
                 else
                 {
                     if (sent)
                     {
-                        Notify.Custom($"PM From: <C>{GetSafePlayerName(name)}</C>. Message: {message}");
+                        Notify.Custom($"DM de: <C>{GetSafePlayerName(name)}</C>. Message: {message}");
                     }
                     else
                     {
-                        Notify.Custom($"PM To: <C>{GetSafePlayerName(name)}</C>. Message: {message}");
+                        Notify.Custom($"DM à: <C>{GetSafePlayerName(name)}</C>. Message: {message}");
                     }
                 }
                 UnregisterPedheadshot(headshotHandle);
@@ -3316,7 +3318,7 @@ namespace vMenuClient
         {
             var pos = Game.PlayerPed.Position;
             var heading = Game.PlayerPed.Heading;
-            string locationName = await GetUserInput("Enter location save name", 30);
+            string locationName = await GetUserInput("Entrez le nom de sauvegarde de l'emplacement", 30);
             if (string.IsNullOrEmpty(locationName))
             {
                 Notify.Error(CommonErrors.InvalidInput);
@@ -3324,11 +3326,11 @@ namespace vMenuClient
             }
             if (vMenuShared.ConfigManager.GetTeleportLocationsData().Any(loc => loc.name == locationName))
             {
-                Notify.Error("This location name is already used, please use a different name.");
+                Notify.Error("Ce nom d'emplacement est déjà utilisé, veuillez utiliser un autre nom.");
                 return;
             }
             TriggerServerEvent("vMenu:SaveTeleportLocation", JsonConvert.SerializeObject(new vMenuShared.ConfigManager.TeleportLocation(locationName, pos, heading)));
-            Notify.Success("The location was successfully saved.");
+            Notify.Success("L'emplacement a été sauvegardé avec succès.");
         }
         #endregion
     }

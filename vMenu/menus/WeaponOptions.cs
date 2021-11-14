@@ -40,15 +40,15 @@ namespace vMenuClient
 
             #region create main weapon options menu and add items
             // Create the menu.
-            menu = new Menu(Game.Player.Name, "Weapon Options");
+            menu = new Menu(Game.Player.Name, "Options d'armement");
 
-            MenuItem getAllWeapons = new MenuItem("Get All Weapons", "Get all weapons.");
-            MenuItem removeAllWeapons = new MenuItem("Remove All Weapons", "Removes all weapons in your inventory.");
-            MenuCheckboxItem unlimitedAmmo = new MenuCheckboxItem("Unlimited Ammo", "Unlimited ammonition supply.", UnlimitedAmmo);
-            MenuCheckboxItem noReload = new MenuCheckboxItem("No Reload", "Never reload.", NoReload);
-            MenuItem setAmmo = new MenuItem("Set All Ammo Count", "Set the amount of ammo in all your weapons.");
-            MenuItem refillMaxAmmo = new MenuItem("Refill All Ammo", "Give all your weapons max ammo.");
-            MenuItem spawnByName = new MenuItem("Spawn Weapon By Name", "Enter a weapon mode name to spawn.");
+            MenuItem getAllWeapons = new MenuItem("Obtenir toutes les armes", "Obtenir toutes les armes.");
+            MenuItem removeAllWeapons = new MenuItem("Retirer toutes les armes", "Supprime toutes les armes de votre inventaire.");
+            MenuCheckboxItem unlimitedAmmo = new MenuCheckboxItem("Munitions illimitées", "Approvisionnement illimité en munitions.", UnlimitedAmmo);
+            MenuCheckboxItem noReload = new MenuCheckboxItem("Pas de rechargement", "Ne jamais recharger.", NoReload);
+            MenuItem setAmmo = new MenuItem("Définir le nombre de munitions", "Définissez la quantité de munitions de toutes vos armes.");
+            MenuItem refillMaxAmmo = new MenuItem("Rechargez toutes les munitions", "Donnez à toutes vos armes un maximum de munitions.");
+            MenuItem spawnByName = new MenuItem("Se donner une arme par son nom", "Entrez un nom d'arme à se donner.");
 
             // Add items based on permissions
             if (IsAllowed(Permission.WPGetAll))
@@ -79,11 +79,11 @@ namespace vMenuClient
             #endregion
 
             #region addonweapons submenu
-            MenuItem addonWeaponsBtn = new MenuItem("Addon Weapons", "Equip / remove addon weapons available on this server.");
-            Menu addonWeaponsMenu = new Menu("Addon Weapons", "Equip/Remove Addon Weapons");
+            MenuItem addonWeaponsBtn = new MenuItem("Armes ajoutées", "Équiper / retirer Armes ajoutées disponibles sur ce serveur.");
+            Menu addonWeaponsMenu = new Menu("Armes ajoutées", "Équiper/retirer Armes ajoutées");
             menu.AddMenuItem(addonWeaponsBtn);
 
-            #region manage creating and accessing addon weapons menu
+            #region manage creating and accessing Armes ajoutées menu
             if (IsAllowed(Permission.WPSpawn) && AddonWeapons != null && AddonWeapons.Count > 0)
             {
                 MenuController.BindMenuItem(menu, addonWeaponsMenu, addonWeaponsBtn);
@@ -91,13 +91,13 @@ namespace vMenuClient
                 {
                     string name = weapon.Key.ToString();
                     uint model = weapon.Value;
-                    var item = new MenuItem(name, $"Click to add/remove this weapon ({name}) to/from your inventory.");
+                    var item = new MenuItem(name, $"Cliquez pour ajouter/supprimer ({name}) vers/depuis votre inventaire.");
                     addonWeaponsMenu.AddMenuItem(item);
                     if (!IsWeaponValid(model))
                     {
                         item.Enabled = false;
                         item.LeftIcon = MenuItem.Icon.LOCK;
-                        item.Description = "This model is not available. Please ask the server owner to verify it's being streamed correctly.";
+                        item.Description = "Ce modèle n'est pas disponible. Veuillez demander au propriétaire du serveur de vérifier qu'il est diffusé correctement.";
                     }
                 }
                 addonWeaponsMenu.OnItemSelect += (sender, item, index) =>
@@ -120,19 +120,19 @@ namespace vMenuClient
             {
                 addonWeaponsBtn.LeftIcon = MenuItem.Icon.LOCK;
                 addonWeaponsBtn.Enabled = false;
-                addonWeaponsBtn.Description = "This option is not available on this server because you don't have permission to use it, or it is not setup correctly.";
+                addonWeaponsBtn.Description = "Cette option n'est pas disponible sur ce serveur car vous n'avez pas la permission de l'utiliser ou elle n'est pas configurée correctement.";
             }
             #endregion
             addonWeaponsMenu.RefreshIndex();
             #endregion
 
-            #region parachute options menu
+            #region Options de parachute menu
 
             if (IsAllowed(Permission.WPParachute))
             {
-                // main parachute options menu setup
-                Menu parachuteMenu = new Menu("Parachute Options", "Parachute Options");
-                MenuItem parachuteBtn = new MenuItem("Parachute Options", "All parachute related options can be changed here.") { Label = "→→→" };
+                // main Options de parachute menu setup
+                Menu parachuteMenu = new Menu("Options de parachute", "Options de parachute");
+                MenuItem parachuteBtn = new MenuItem("Options de parachute", "Toutes les options relatives au parachute peuvent être modifiées ici.") { Label = "→→→" };
 
                 MenuController.AddSubmenu(menu, parachuteMenu);
                 menu.AddMenuItem(parachuteBtn);
@@ -169,18 +169,18 @@ namespace vMenuClient
                     GetLabelText("PD_TINT7"),
 
                     // broken in FiveM for some weird reason:
-                    GetLabelText("PSD_CAN_0") + " ~r~For some reason this one doesn't seem to work in FiveM.",
-                    GetLabelText("PSD_CAN_1") + " ~r~For some reason this one doesn't seem to work in FiveM.",
-                    GetLabelText("PSD_CAN_2") + " ~r~For some reason this one doesn't seem to work in FiveM.",
-                    GetLabelText("PSD_CAN_3") + " ~r~For some reason this one doesn't seem to work in FiveM.",
-                    GetLabelText("PSD_CAN_4") + " ~r~For some reason this one doesn't seem to work in FiveM.",
-                    GetLabelText("PSD_CAN_5") + " ~r~For some reason this one doesn't seem to work in FiveM."
+                    GetLabelText("PSD_CAN_0") + " ~r~Pour une raison quelconque, celui-ci ne semble pas fonctionner dans FiveM..",
+                    GetLabelText("PSD_CAN_1") + " ~r~Pour une raison quelconque, celui-ci ne semble pas fonctionner dans FiveM..",
+                    GetLabelText("PSD_CAN_2") + " ~r~Pour une raison quelconque, celui-ci ne semble pas fonctionner dans FiveM..",
+                    GetLabelText("PSD_CAN_3") + " ~r~Pour une raison quelconque, celui-ci ne semble pas fonctionner dans FiveM..",
+                    GetLabelText("PSD_CAN_4") + " ~r~Pour une raison quelconque, celui-ci ne semble pas fonctionner dans FiveM..",
+                    GetLabelText("PSD_CAN_5") + " ~r~Pour une raison quelconque, celui-ci ne semble pas fonctionner dans FiveM.."
                 };
 
-                MenuItem togglePrimary = new MenuItem("Toggle Primary Parachute", "Equip or remove the primary parachute");
-                MenuItem toggleReserve = new MenuItem("Enable Reserve Parachute", "Enables the reserve parachute. Only works if you enabled the primary parachute first. Reserve parachute can not be removed from the player once it's activated.");
-                MenuListItem primaryChutes = new MenuListItem("Primary Chute Style", chutes, 0, $"Primary chute: {chuteDescriptions[0]}");
-                MenuListItem secondaryChutes = new MenuListItem("Reserve Chute Style", chutes, 0, $"Reserve chute: {chuteDescriptions[0]}");
+                MenuItem togglePrimary = new MenuItem("Activer/Désactiver Parachute primaire", "Equiper ou retirer le parachute primaire");
+                MenuItem toggleReserve = new MenuItem("Activer Parachute de secours", "Active le parachute de secours. Ne fonctionne que si vous avez activé le parachute principal en premier. Le parachute de secours ne peut pas être retiré du joueur une fois qu'il est activé.");
+                MenuListItem primaryChutes = new MenuListItem("Chute primaire Style", chutes, 0, $"Chute primaire: {chuteDescriptions[0]}");
+                MenuListItem secondaryChutes = new MenuListItem("Reserve Chute Style", chutes, 0, $"Chute de secours: {chuteDescriptions[0]}");
                 MenuCheckboxItem unlimitedParachutes = new MenuCheckboxItem("Unlimited Parachutes", "Enable unlimited parachutes and reserve parachutes.", UnlimitedParachutes);
                 MenuCheckboxItem autoEquipParachutes = new MenuCheckboxItem("Auto Equip Parachutes", "Automatically equip a parachute and reserve parachute when entering planes/helicopters.", AutoEquipChute);
 
@@ -204,7 +204,7 @@ namespace vMenuClient
                     new int[3] { 20, 20, 20 },
                 };
 
-                MenuListItem smokeColors = new MenuListItem("Smoke Trail Color", smokeColorsList, 0, "Choose a smoke trail color, then press select to change it. Changing colors takes 4 seconds, you can not use your smoke while the color is being changed.");
+                MenuListItem smokeColors = new MenuListItem("Couleur de la traînée de fumée", smokeColorsList, 0, "Choisissez une couleur de piste de fumée, puis appuyez sur select pour la changer. Le changement de couleur prend 4 secondes, vous ne pouvez pas utiliser votre fumée pendant que la couleur est en train de changer.");
 
                 parachuteMenu.AddMenuItem(togglePrimary);
                 parachuteMenu.AddMenuItem(toggleReserve);
@@ -220,19 +220,19 @@ namespace vMenuClient
                     {
                         if (HasPedGotWeapon(Game.PlayerPed.Handle, (uint)GetHashKey("gadget_parachute"), false))
                         {
-                            Subtitle.Custom("Primary parachute removed.");
+                            Subtitle.Custom("Parachute primaire enlevé.");
                             RemoveWeaponFromPed(Game.PlayerPed.Handle, (uint)GetHashKey("gadget_parachute"));
                         }
                         else
                         {
-                            Subtitle.Custom("Primary parachute added.");
+                            Subtitle.Custom("Parachute primaire ajouté.");
                             GiveWeaponToPed(Game.PlayerPed.Handle, (uint)GetHashKey("gadget_parachute"), 0, false, false);
                         }
                     }
                     else if (item == toggleReserve)
                     {
                         SetPlayerHasReserveParachute(Game.Player.Handle);
-                        Subtitle.Custom("Reserve parachute has been added.");
+                        Subtitle.Custom("Le parachute de secours a été ajouté.");
 
                     }
                 };
@@ -267,12 +267,12 @@ namespace vMenuClient
                     }
                     else if (item == primaryChutes)
                     {
-                        item.Description = $"Primary chute: {chuteDescriptions[newIndex]}";
+                        item.Description = $"Chute primaire: {chuteDescriptions[newIndex]}";
                         SetPlayerParachuteTintIndex(Game.Player.Handle, newIndex);
                     }
                     else if (item == secondaryChutes)
                     {
-                        item.Description = $"Reserve chute: {chuteDescriptions[newIndex]}";
+                        item.Description = $"Chute de secours: {chuteDescriptions[newIndex]}";
                         SetPlayerReserveParachuteTintIndex(Game.Player.Handle, newIndex);
                     }
                 }
@@ -283,32 +283,32 @@ namespace vMenuClient
             #endregion
 
             #region Create Weapon Category Submenus
-            MenuItem spacer = GetSpacerMenuItem("↓ Weapon Categories ↓");
+            MenuItem spacer = GetSpacerMenuItem("↓ Catégories d'armes ↓");
             menu.AddMenuItem(spacer);
 
-            Menu handGuns = new Menu("Weapons", "Handguns");
-            MenuItem handGunsBtn = new MenuItem("Handguns");
+            Menu handGuns = new Menu("Armes", "Armes de poing");
+            MenuItem handGunsBtn = new MenuItem("Armes de poing");
 
-            Menu rifles = new Menu("Weapons", "Assault Rifles");
-            MenuItem riflesBtn = new MenuItem("Assault Rifles");
+            Menu rifles = new Menu("Armes", "Fusils d'assaut");
+            MenuItem riflesBtn = new MenuItem("Fusils d'assaut");
 
-            Menu shotguns = new Menu("Weapons", "Shotguns");
-            MenuItem shotgunsBtn = new MenuItem("Shotguns");
+            Menu shotguns = new Menu("Armes", "Fusils à pompe");
+            MenuItem shotgunsBtn = new MenuItem("Fusils à pompe");
 
-            Menu smgs = new Menu("Weapons", "Sub-/Light Machine Guns");
-            MenuItem smgsBtn = new MenuItem("Sub-/Light Machine Guns");
+            Menu smgs = new Menu("Armes", "Mitrailleuses sub-légères");
+            MenuItem smgsBtn = new MenuItem("Mitrailleuses sub-légères");
 
-            Menu throwables = new Menu("Weapons", "Throwables");
-            MenuItem throwablesBtn = new MenuItem("Throwables");
+            Menu throwables = new Menu("Armes", "Objets jetables");
+            MenuItem throwablesBtn = new MenuItem("Objets jetables");
 
-            Menu melee = new Menu("Weapons", "Melee");
-            MenuItem meleeBtn = new MenuItem("Melee");
+            Menu melee = new Menu("Armes", "Mêlée");
+            MenuItem meleeBtn = new MenuItem("Mêlée");
 
-            Menu heavy = new Menu("Weapons", "Heavy Weapons");
-            MenuItem heavyBtn = new MenuItem("Heavy Weapons");
+            Menu heavy = new Menu("Armes", "Armes lourdes");
+            MenuItem heavyBtn = new MenuItem("Armes lourdes");
 
-            Menu snipers = new Menu("Weapons", "Sniper Rifles");
-            MenuItem snipersBtn = new MenuItem("Sniper Rifles");
+            Menu snipers = new Menu("Armes", "Fusils de sniper");
+            MenuItem snipersBtn = new MenuItem("Fusils de sniper");
 
             MenuController.AddSubmenu(menu, handGuns);
             MenuController.AddSubmenu(menu, rifles);
@@ -362,14 +362,14 @@ namespace vMenuClient
                 {
                     //Log($"[DEBUG LOG] [WEAPON-BUG] {weapon.Name} - {weapon.Perm} = {IsAllowed(weapon.Perm)} & All = {IsAllowed(Permission.WPGetAll)}");
                     #region Create menu for this weapon and add buttons
-                    Menu weaponMenu = new Menu("Weapon Options", weapon.Name)
+                    Menu weaponMenu = new Menu("Options d'armement", weapon.Name)
                     {
                         ShowWeaponStatsPanel = true
                     };
                     var stats = new Game.WeaponHudStats();
                     Game.GetWeaponHudStats(weapon.Hash, ref stats);
                     weaponMenu.SetWeaponStats((float)stats.hudDamage / 100f, (float)stats.hudSpeed / 100f, (float)stats.hudAccuracy / 100f, (float)stats.hudRange / 100f);
-                    MenuItem weaponItem = new MenuItem(weapon.Name, $"Open the options for ~y~{weapon.Name}~s~.")
+                    MenuItem weaponItem = new MenuItem(weapon.Name, $"Ouvrir les options pour ~y~{weapon.Name}~s~.")
                     {
                         Label = "→→→",
                         LeftIcon = MenuItem.Icon.GUN,
@@ -378,7 +378,7 @@ namespace vMenuClient
 
                     weaponInfo.Add(weaponMenu, weapon);
 
-                    MenuItem getOrRemoveWeapon = new MenuItem("Equip/Remove Weapon", "Add or remove this weapon to/form your inventory.")
+                    MenuItem getOrRemoveWeapon = new MenuItem("Équiper/enlever une arme", "Ajoutez ou supprimez cette arme de votre inventaire.")
                     {
                         LeftIcon = MenuItem.Icon.GUN
                     };
@@ -386,11 +386,11 @@ namespace vMenuClient
                     if (!IsAllowed(Permission.WPSpawn))
                     {
                         getOrRemoveWeapon.Enabled = false;
-                        getOrRemoveWeapon.Description = "You do not have permission to use this option.";
+                        getOrRemoveWeapon.Description = "Vous n'avez pas la permission d'utiliser cette option.";
                         getOrRemoveWeapon.LeftIcon = MenuItem.Icon.LOCK;
                     }
 
-                    MenuItem fillAmmo = new MenuItem("Re-fill Ammo", "Get max ammo for this weapon.")
+                    MenuItem fillAmmo = new MenuItem("Remplir les munitions", "Obtenez le maximum de munitions pour cette arme.")
                     {
                         LeftIcon = MenuItem.Icon.AMMO
                     };
@@ -412,7 +412,7 @@ namespace vMenuClient
                         }
                     }
 
-                    MenuListItem weaponTints = new MenuListItem("Tints", tints, 0, "Select a tint for your weapon.");
+                    MenuListItem weaponTints = new MenuListItem("Teintes", tints, 0, "");
                     weaponMenu.AddMenuItem(weaponTints);
                     #endregion
 
@@ -427,7 +427,7 @@ namespace vMenuClient
                             }
                             else
                             {
-                                Notify.Error("You need to get the weapon first!");
+                                Notify.Error("Vous devez d'abord récupérer l'arme !");
                             }
                         }
                     };
@@ -446,14 +446,14 @@ namespace vMenuClient
                             if (HasPedGotWeapon(Game.PlayerPed.Handle, hash, false))
                             {
                                 RemoveWeaponFromPed(Game.PlayerPed.Handle, hash);
-                                Subtitle.Custom("Weapon removed.");
+                                Subtitle.Custom("Arme retirée.");
                             }
                             else
                             {
                                 var ammo = 255;
                                 GetMaxAmmo(Game.PlayerPed.Handle, hash, ref ammo);
                                 GiveWeaponToPed(Game.PlayerPed.Handle, hash, ammo, false, true);
-                                Subtitle.Custom("Weapon added.");
+                                Subtitle.Custom("Arme ajoutée.");
                             }
                         }
                         else if (item == fillAmmo)
@@ -466,7 +466,7 @@ namespace vMenuClient
                             }
                             else
                             {
-                                Notify.Error("You need to get the weapon first before re-filling ammo!");
+                                Notify.Error("Vous devez d'abord obtenir l'arme avant de recharger les munitions !");
                             }
                         }
                     };
@@ -480,7 +480,7 @@ namespace vMenuClient
                             foreach (var comp in weapon.Components)
                             {
                                 //Log($"{weapon.Name} : {comp.Key}");
-                                MenuItem compItem = new MenuItem(comp.Key, "Click to equip or remove this component.");
+                                MenuItem compItem = new MenuItem(comp.Key, "Cliquez pour équiper ou supprimer ce composant.");
                                 weaponComponents.Add(compItem, comp.Key);
                                 weaponMenu.AddMenuItem(compItem);
 
@@ -498,7 +498,7 @@ namespace vMenuClient
                                             {
                                                 RemoveWeaponComponentFromPed(Game.PlayerPed.Handle, Weapon.Hash, componentHash);
 
-                                                Subtitle.Custom("Component removed.");
+                                                Subtitle.Custom("Composant retiré.");
                                             }
                                             else
                                             {
@@ -512,12 +512,12 @@ namespace vMenuClient
                                                 SetAmmoInClip(Game.PlayerPed.Handle, Weapon.Hash, clipAmmo);
 
                                                 SetPedAmmo(Game.PlayerPed.Handle, Weapon.Hash, ammo);
-                                                Subtitle.Custom("Component equiped.");
+                                                Subtitle.Custom("Composant équipé.");
                                             }
                                         }
                                         else
                                         {
-                                            Notify.Error("You need to get the weapon first before you can modify it.");
+                                            Notify.Error("Vous devez d'abord obtenir l'arme avant de pouvoir la modifier.");
                                         }
                                     }
                                 };

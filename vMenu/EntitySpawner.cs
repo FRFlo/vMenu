@@ -68,7 +68,7 @@ namespace vMenuClient
 
             if (CurrentEntity != null)
             {
-                Notify.Error("One entity is currently being processed.");
+                Notify.Error("Une entité est actuellement en cours de traitement.");
                 return;
             }
 
@@ -95,7 +95,7 @@ namespace vMenuClient
 
             if (!CurrentEntity.Exists())
             {
-                Notify.Error("Failed to create entity");
+                Notify.Error("Impossible de créer l'entité");
                 return;
             }
 

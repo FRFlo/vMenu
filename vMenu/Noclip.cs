@@ -15,14 +15,14 @@ namespace vMenuClient
 
         private List<string> speeds = new List<string>()
         {
-            "Very Slow",
-            "Slow",
+            "Très lent",
+            "Lent",
             "Normal",
-            "Fast",
-            "Very Fast",
-            "Extremely Fast",
-            "Extremely Fast v2.0",
-            "Max Speed"
+            "Rapide",
+            "Très Rapide",
+            "Flash",
+            "Flash v2.0",
+            "Vitesse max"
         };
 
         public NoClip()
@@ -60,37 +60,37 @@ namespace vMenuClient
                     BeginScaleformMovieMethod(Scale, "SET_DATA_SLOT");
                     ScaleformMovieMethodAddParamInt(0);
                     PushScaleformMovieMethodParameterString("~INPUT_SPRINT~");
-                    PushScaleformMovieMethodParameterString($"Change Speed ({speeds[MovingSpeed]})");
+                    PushScaleformMovieMethodParameterString($"Changer la vitesse ({speeds[MovingSpeed]})");
                     EndScaleformMovieMethod();
 
                     BeginScaleformMovieMethod(Scale, "SET_DATA_SLOT");
                     ScaleformMovieMethodAddParamInt(1);
                     PushScaleformMovieMethodParameterString("~INPUT_MOVE_LR~");
-                    PushScaleformMovieMethodParameterString($"Turn Left/Right");
+                    PushScaleformMovieMethodParameterString($"Gauche/droite");
                     EndScaleformMovieMethod();
 
                     BeginScaleformMovieMethod(Scale, "SET_DATA_SLOT");
                     ScaleformMovieMethodAddParamInt(2);
                     PushScaleformMovieMethodParameterString("~INPUT_MOVE_UD~");
-                    PushScaleformMovieMethodParameterString($"Move");
+                    PushScaleformMovieMethodParameterString($"Se déplacer");
                     EndScaleformMovieMethod();
 
                     BeginScaleformMovieMethod(Scale, "SET_DATA_SLOT");
                     ScaleformMovieMethodAddParamInt(3);
                     PushScaleformMovieMethodParameterString("~INPUT_MULTIPLAYER_INFO~");
-                    PushScaleformMovieMethodParameterString($"Down");
+                    PushScaleformMovieMethodParameterString($"Descendre");
                     EndScaleformMovieMethod();
 
                     BeginScaleformMovieMethod(Scale, "SET_DATA_SLOT");
                     ScaleformMovieMethodAddParamInt(4);
                     PushScaleformMovieMethodParameterString("~INPUT_COVER~");
-                    PushScaleformMovieMethodParameterString($"Up");
+                    PushScaleformMovieMethodParameterString($"Monter");
                     EndScaleformMovieMethod();
 
                     BeginScaleformMovieMethod(Scale, "SET_DATA_SLOT");
                     ScaleformMovieMethodAddParamInt(5);
                     PushScaleformMovieMethodParameterString("~INPUT_VEH_HEADLIGHT~");
-                    PushScaleformMovieMethodParameterString($"Cam Mode");
+                    PushScaleformMovieMethodParameterString($"Caméra");
                     EndScaleformMovieMethod();
 
                     BeginScaleformMovieMethod(Scale, "SET_DATA_SLOT");
